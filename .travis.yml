@@ -1,0 +1,12 @@
+# octofacts!
+
+language: ruby
+install: true
+script: "script/cibuild"
+
+matrix:
+  include:
+    - rvm: 2.4
+    - rvm: 2.3.2
+    - rvm: 2.2.3
+    - rvm: 2.1
