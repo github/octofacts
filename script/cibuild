@@ -1,0 +1,77 @@
+#!/bin/bash
+
+rspec_puppet_versions="2.3.2 2.4.0 2.5.0 2.6.2"
+puppet_versions="4.10.4"
+
+set -e
+
+[ -z "$DEBUG" ] || set -x
+
+DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd)"
+cd "$DIR"
+export RBENV_VERSION="$(cat ${DIR}/.ruby-version)"
+
+TEMPDIR=$(mktemp -d -t cibuild-XXXXXX)
+function cleanup() {
+  rm -rf "${TEMPDIR}"
+}
+trap cleanup EXIT
+
+test -d "/usr/share/rbenv/shims" && {
+  export PATH="/usr/share/rbenv/shims:$PATH"
+}
+
+echo "==> Bootstrapping..."
+"${DIR}/script/bootstrap"
+
+PATH="${DIR}/bin:$PATH"
+
+echo "==> Running rubocop..."
+RUBOCOP_YML="${DIR}/.rubocop.yml"
+bundle exec rubocop --config "$RUBOCOP_YML" --no-color -D "lib" "spec/octofacts" "spec/octofacts_updater" "spec/*.rb" \
+  && EXIT_RUBOCOP=$? || EXIT_RUBOCOP=$?
+
+echo "==> Running spec tests for octofacts..."
+bundle exec rake octofacts:spec:octofacts && EXIT_OCTOFACTS_RSPEC=$? || EXIT_OCTOFACTS_RSPEC=$?
+COVERAGE_OCTOFACTS=$(grep "covered_percent" "$DIR/lib/octofacts/coverage/.last_run.json" | awk '{ print $2 }')
+
+echo "==> Running spec tests for octofacts_updater..."
+bundle exec rake octofacts:spec:octofacts_updater && EXIT_UPDATER_RSPEC=$? || EXIT_UPDATER_RSPEC=$?
+COVERAGE_UPDATER=$(grep "covered_percent" "$DIR/lib/octofacts_updater/coverage/.last_run.json" | awk '{ print $2 }')
+
+# Integration tests
+EXIT_INTEGRATION=0
+for puppet_version in $puppet_versions; do
+  for rspec_puppet_version in $rspec_puppet_versions; do
+    export RSPEC_PUPPET_VERSION=$rspec_puppet_version
+    export PUPPET_VERSION=$puppet_version
+    echo "==> Running integration tests (puppet ${PUPPET_VERSION}, rspec-puppet ${RSPEC_PUPPET_VERSION})"
+    if "${DIR}/script/bootstrap" > "$TEMPDIR/bootstrap.log" 2>&1; then
+      rm -f "$TEMPDIR/bootstrap.log"
+    else
+      cat "$TEMPDIR/bootstrap.log"
+      exit 1
+    fi
+    bundle exec rake octofacts:spec:octofacts_integration && local_integration_rspec=$? || local_integration_rspec=$?
+    if [ "$local_integration_rspec" -ne 0 ]; then EXIT_INTEGRATION=$local_integration_rspec; fi
+  done
+done
+
+echo ""
+echo "==> Summary Results"
+echo "Rubocop:                 Exit ${EXIT_RUBOCOP}"
+echo "octofacts rspec:         Exit ${EXIT_OCTOFACTS_RSPEC}, Coverage ${COVERAGE_OCTOFACTS}"
+echo "octofacts-updater rspec: Exit ${EXIT_UPDATER_RSPEC}, Coverage ${COVERAGE_UPDATER}"
+echo "Integration:             Exit ${EXIT_INTEGRATION}"
+echo ""
+
+if [ "$EXIT_RUBOCOP" == 0 ] && [ "$EXIT_OCTOFACTS_RSPEC" == 0 ] && [ "$EXIT_UPDATER_RSPEC" == 0 ] && [ "$EXIT_INTEGRATION" == 0 ]; then
+  if [ "$COVERAGE_OCTOFACTS" == "100.0" ] && [ "$COVERAGE_UPDATER" == "100.0" ]; then
+    exit 0
+  else
+    echo "All tests passed, but test coverage is not 100%"
+    exit 1
+  fi
+fi
+
+exit 1

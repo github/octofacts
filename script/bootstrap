@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+[ -z "$DEBUG" ] || set -x
+
+echo 'Starting script/bootstrap'
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+rm -rf "${DIR}/.bundle"
+
+echo 'Running bundler'
+bundle install --no-prune --path vendor/bundle --local
+bundle clean
+bundle binstubs --force puppet pry rake rspec-core rubocop
+chmod 0755 bin/octofacts-updater
+
+echo 'Completed script/bootstrap successfully'
+exit 0

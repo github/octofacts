@@ -1,0 +1,94 @@
+# Configuration file for the octofacts updater.
+---
+# This section configures a connection to PuppetDB, so you can retrieve facts from there.
+# Your PuppetDB must support query API v4 (which is supported in PuppetDB 3.0 and higher.)
+# puppetdb:
+#  url: https://puppetdb.example.net:8081
+
+# This section configures an SSH connection to a Puppet Server, so you can retrieve facts
+# from its cache. The 'server' and 'user' parameters are required.
+#
+# 'command' defaults to running "cat /opt/puppetlabs/server/data/puppetserver/yaml/facts/%%NODE%%.yaml"
+# on the target system. Please note that the user you log in as must be sufficiently privileged, as normally
+# this directory is locked down only to the puppet user.
+#
+# Any other parameters you provide will be symbolized and passed to net-ssh (https://github.com/net-ssh/net-ssh).
+# ssh:
+#   server: puppetserver.example.net
+#   user: puppet
+#   command: cat /opt/puppetlabs/server/data/puppetserver/yaml/facts/%%NODE%%.yaml
+#   password: secret001
+
+# You can also configure "ssh" to log in to a specific server. This is useful if you want to run "facter" on
+# that system and capture the results. Similar to the previous section, "%%NODE%%" is replaced with the FQDN
+# of the node whose facts you are gathering.
+# ssh:
+#   server: %%NODE%%
+#   user: puppet
+#   command: /opt/puppetlabs/puppet/bin/facter -p --yaml
+
+# This section controls your index file. If you'd like to select appropriate fact fixtures
+# without explicitly naming a node, list the facts here that you would like to have indexed.
+# You can also specify the path to the index file. Be sure to adjust it for your site.
+index:
+  file: /var/lib/jenkins/workspace/puppet/spec/fixtures/facts/octofacts-index.yaml
+  indexed_facts:
+    - virtual
+
+# This section cleans up and anonymizes facts. We have added a number of facts to this list
+# that contain sensitive information or change frequently. You should add any facts from your
+# site as needed.
+facts:
+  ec2_userdata:
+    plugin: delete
+  trusted:
+    plugin: delete
+  ec2_metadata:
+    structure: iam::info
+    plugin: delete
+  ec2_iam_info_NNN:
+    regexp: ^ec2_iam_info_\d+
+    plugin: delete
+  uptime:
+    regexp: ^uptime
+    plugin: delete
+  memoryfree:
+    regexp: ^memoryfree
+    plugin: delete
+  swapfree:
+    regexp: ^swapfree
+    plugin: delete
+  load_averages:
+    plugin: delete
+  memory_stats:
+    fact: memory
+    structure:
+      - regexp: .+
+      - regexp: ^(available|available_bytes|capacity|used|used_bytes)$
+    plugin: delete
+  system_uptime:
+    value:
+      days: 17
+      hours: 415
+      seconds: 1495197
+      uptime: 17 days
+    plugin: set
+  ssh_keys:
+    regexp: ^ssh\w+key$
+    plugin: randomize_long_string
+  sshfp_keys:
+    regexp: ^sshfp_\w+$
+    plugin: sshfp_randomize
+  ssh_structured_keys:
+    fact: ssh
+    structure:
+      - regexp: .+
+      - regexp: ^key$
+    plugin: randomize_long_string
+  ssh_structured_fingerprints:
+    fact: ssh
+    structure:
+      - regexp: .+
+      - regexp: ^fingerprints$
+      - regexp: ^sha\d+$
+    plugin: sshfp_randomize

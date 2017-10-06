@@ -1,0 +1,5 @@
+<%- if @ec2 -%>
+availability-zone: <%= @ec2_metadata["placement"]["availability-zone"] %>
+<%- else -%>
+Not an EC2 instance
+<%- end -%>

@@ -1,0 +1,9 @@
+inherit_gem:
+  rubocop-github:
+    - config/default.yml
+
+AllCops:
+  DisplayCopNames: true
+
+AllCops:
+  TargetRubyVersion: 2.1

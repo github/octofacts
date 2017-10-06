@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# This script is being invoked via <root dir>/.git/hooks, hence the
+# base directory is up two levels, not just one.
+
+set -e
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
+cd "$DIR"
+
+echo "==> Analyzing code with rubocop"
+
+# Make sure we can use git correctly
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  :
+else
+  echo "Unable to determine revision of this git repo"
+  exit 1
+fi
+
+# Check whitespace problems
+if git diff-index --check --cached HEAD --; then
+  :
+else
+  echo "Please address these whitespace issues and then try committing again"
+  exit 1
+fi
+
+# Run rubocop on any ruby files that have been changed or added
+
+files=$(git diff-index --diff-filter=AM --name-only --cached HEAD | tr "\n" " ")
+if [ -n "$files" ]; then
+  cmd="bundle exec rubocop --config '${DIR}/.rubocop.yml' -D $files"
+  bundle exec rubocop --config "${DIR}/.rubocop.yml" -D $files
+  if [ $? -ne 0 ]; then
+    cat >&2 <<EOF
+
+Rubocop returned an error for the following command:
+
+$cmd
+
+Please address these style or syntax issues and then try committing again
+EOF
+    exit 1
+  fi
+fi
+exit 0

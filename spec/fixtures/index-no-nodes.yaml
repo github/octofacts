@@ -1,0 +1,38 @@
+---
+_nodes:
+- broken.example.com
+app:
+  ops:
+  - ops-consul-67890.dc1.example.com
+  - ops-consul-12345.dc2.example.com
+  puppet:
+  - puppet-puppetserver-12345.dc1.example.com
+  - puppet-puppetserver-00decaf.dc1.example.com
+datacenter:
+  dc1:
+  - ops-consul-67890.dc1.example.com
+  - puppet-puppetserver-12345.dc1.example.com
+  - puppet-puppetserver-00decaf.dc1.example.com
+  dc2:
+  - ops-consul-12345.dc2.example.com
+env:
+  production:
+  - ops-consul-67890.dc1.example.com
+  - ops-consul-12345.dc2.example.com
+  - puppet-puppetserver-12345.dc1.example.com
+  staging:
+  - puppet-puppetserver-00decaf.dc1.example.com
+lsbdistcodename:
+  jessie:
+  - ops-consul-67890.dc1.example.com
+  - puppet-puppetserver-00decaf.dc1.example.com
+  precise:
+  - ops-consul-12345.dc2.example.com
+  - puppet-puppetserver-12345.dc1.example.com
+role:
+  consul:
+  - ops-consul-67890.dc1.example.com
+  - ops-consul-12345.dc2.example.com
+  puppetserver:
+  - puppet-puppetserver-12345.dc1.example.com
+  - puppet-puppetserver-00decaf.dc1.example.com

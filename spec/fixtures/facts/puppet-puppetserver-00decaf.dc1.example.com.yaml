@@ -1,0 +1,8 @@
+---
+fqdn: puppet-puppetserver-00decaf.dc1.example.com
+datacenter: dc1
+app: puppet
+env: staging
+role: puppetserver
+lsbdistcodename: jessie
+shorthost: puppet-puppetserver-00decaf

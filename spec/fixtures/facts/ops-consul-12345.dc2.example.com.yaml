@@ -1,0 +1,8 @@
+---
+fqdn: ops-consul-12345.dc2.example.com
+datacenter: dc2
+app: ops
+env: production
+role: consul
+lsbdistcodename: precise
+shorthost: ops-consul-12345

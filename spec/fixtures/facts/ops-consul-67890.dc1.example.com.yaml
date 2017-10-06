@@ -1,0 +1,8 @@
+---
+fqdn: ops-consul-67890.dc1.example.com
+datacenter: dc1
+app: ops
+env: production
+role: consul
+lsbdistcodename: jessie
+shorthost: ops-consul-67890

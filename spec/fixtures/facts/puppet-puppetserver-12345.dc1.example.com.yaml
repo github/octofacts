@@ -1,0 +1,8 @@
+---
+fqdn: puppet-puppetserver-12345.dc1.example.com
+datacenter: dc1
+app: puppet
+env: production
+role: puppetserver
+lsbdistcodename: precise
+shorthost: puppet-puppetserver-12345

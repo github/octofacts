@@ -1,0 +1,207 @@
+---
+architecture: amd64
+attributes:
+  ec2:
+    availability_zone: us-east-1a
+    image_id: ami-000decaf
+    instance_id: i-12345678901234567
+    instance_type: m4.xlarge
+    region: us-east-1
+    state: running
+    vpc_id: vpc-000decaf
+augeasversion: 1.2.0
+bios_release_date: 02/16/2017
+bios_vendor: Xen
+bios_version: 4.2.amazon
+blockdevice_xvda_size: 21474836480
+blockdevices: xvda
+bonding_bond0_mode: balance-rr
+bonding_bond0_slaves: none
+bonding_bond0_status: down
+bonding_interfaces: bond0
+clientcert: somenode.example.net
+clientnoop: false
+clientversion: 3.8.7
+cores_mounted: false
+datacenter: ec2
+domain: example.net
+ec2: true
+ec2_ami_id: ami-000decaf
+ec2_ami_launch_index: '0'
+ec2_ami_manifest_path: "(unknown)"
+ec2_block_device_mapping_ami: "/dev/sda1"
+ec2_block_device_mapping_root: "/dev/sda1"
+ec2_hostname: ip-172-16-1-2.example.net
+ec2_instance_action: none
+ec2_instance_id: i-12345678901234567
+ec2_instance_type: m4.xlarge
+ec2_local_hostname: ip-172-16-1-2.example.net
+ec2_local_ipv4: 172.16.1.2
+ec2_mac: 0a:11:22:33:44:55
+ec2_metadata:
+  mac: 0a:11:22:33:44:55
+  hostname: ip-172-16-1-2.example.net
+  ami-id: ami-000decaf
+  services:
+    domain: amazonaws.com
+    partition: aws
+  instance-type: m4.xlarge
+  placement:
+    availability-zone: us-east-1a
+  instance-action: none
+  profile: default-hvm
+  ami-manifest-path: "(unknown)"
+  reservation-id: r-0123456789abcdef0
+  network:
+    interfaces:
+      macs:
+        0a:11:22:33:44:55:
+          mac: 0a:11:22:33:44:55
+          security-group-ids: sg-000decaf
+          vpc-id: vpc-000decaf
+          vpc-ipv4-cidr-blocks: 172.16.0.0/16
+          local-ipv4s: 172.16.1.2
+          subnet-ipv4-cidr-block: 172.16.0.0/20
+          subnet-id: subnet-000decaf
+          vpc-ipv4-cidr-block: 172.16.0.0/16
+          security-groups: default
+          owner-id: '987654321012'
+          device-number: '0'
+          interface-id: eni-000decaf
+          local-hostname: ip-172-16-1-2.example.net
+  instance-id: i-12345678901234567
+  security-groups: default
+  ami-launch-index: '0'
+  block-device-mapping:
+    ami: "/dev/sda1"
+    root: "/dev/sda1"
+  metrics:
+    vhostmd: <?xml version="1.0" encoding="UTF-8"?>
+  iam: {}
+  local-ipv4: 172.16.1.2
+  local-hostname: ip-172-16-1-2.example.net
+ec2_metrics_vhostmd: <?xml version="1.0" encoding="UTF-8"?>
+ec2_network_interfaces_macs_0a:11:22:33:44:55_device_number: '0'
+ec2_network_interfaces_macs_0a:11:22:33:44:55_interface_id: eni-000decaf
+ec2_network_interfaces_macs_0a:11:22:33:44:55_local_hostname: ip-172-16-1-2.example.net
+ec2_network_interfaces_macs_0a:11:22:33:44:55_local_ipv4s: 172.16.1.2
+ec2_network_interfaces_macs_0a:11:22:33:44:55_mac: 0a:11:22:33:44:55
+ec2_network_interfaces_macs_0a:11:22:33:44:55_owner_id: '987654321012'
+ec2_network_interfaces_macs_0a:11:22:33:44:55_security_group_ids: sg-000decaf
+ec2_network_interfaces_macs_0a:11:22:33:44:55_security_groups: default
+ec2_network_interfaces_macs_0a:11:22:33:44:55_subnet_id: subnet-000decaf
+ec2_network_interfaces_macs_0a:11:22:33:44:55_subnet_ipv4_cidr_block: 172.16.0.0/20
+ec2_network_interfaces_macs_0a:11:22:33:44:55_vpc_id: vpc-000decaf
+ec2_network_interfaces_macs_0a:11:22:33:44:55_vpc_ipv4_cidr_block: 172.16.0.0/16
+ec2_network_interfaces_macs_0a:11:22:33:44:55_vpc_ipv4_cidr_blocks: 172.16.0.0/16
+ec2_placement_availability_zone: us-east-1a
+ec2_profile: default-hvm
+ec2_region: us-east-1
+ec2_reservation_id: r-0123456789abcdef0
+ec2_security_groups: default
+ec2_services_domain: amazonaws.com
+ec2_services_partition: aws
+enable_pager: 'false'
+eth0-txrx-0_irq: '86'
+eth0-txrx-1_irq: '87'
+eth0_irq: '88'
+facterversion: 2.4.6
+filesystems: btrfs,ext2,ext3,ext4,hfs,hfsplus,jfs,minix,msdos,ntfs,qnx4,ufs,vfat,xfs
+fqdn: somenode.example.net
+gateway: 172.16.0.1
+gid: root
+hardwareisa: unknown
+hardwaremodel: x86_64
+hostname: somenode
+id: root
+interfaces: bond0,eth0,lo
+ip6tables_version: 1.4.21
+ipaddress: 172.16.1.2
+ipaddress_eth0: 172.16.1.2
+ipaddress_lo: 127.0.0.1
+is_virtual: true
+kernel: Linux
+kernelmajversion: '3.16'
+kernelrelease: 3.16.0-4-amd64
+kernelversion: 3.16.0
+lsbdistcodename: jessie
+lsbdistdescription: Debian GNU/Linux 8.8 (jessie)
+lsbdistid: Debian
+lsbdistrelease: '8.8'
+lsbmajdistrelease: '8'
+lsbminordistrelease: '8'
+lsbrelease: core-2.0-amd64:core-2.0-noarch:core-3.0-amd64:core-3.0-noarch:core-3.1-amd64:core-3.1-noarch:core-3.2-amd64:core-3.2-noarch:core-4.0-amd64:core-4.0-noarch:core-4.1-amd64:core-4.1-noarch:security-4.0-amd64:security-4.0-noarch:security-4.1-amd64:security-4.1-noarch
+macaddress: 0a:11:22:33:44:55
+macaddress_bond0: 0a:11:22:33:44:55
+macaddress_eth0: 0a:11:22:33:44:55
+manufacturer: Xen
+memorysize: 15.71 GB
+memorysize_gb: 15.71
+memorysize_mb: '16082.46'
+mounts: "/,/run,/sys/kernel/security,/run/lock,/sys/fs/pstore,/dev/mqueue,/sys/kernel/debug,/dev/hugepages,/boot"
+mtu_bond0: 1500
+mtu_eth0: 9001
+mtu_lo: 65536
+netmask: 255.255.240.0
+netmask_eth0: 255.255.240.0
+netmask_lo: 255.0.0.0
+network_eth0: 172.16.0.0
+network_lo: 127.0.0.0
+operatingsystem: Debian
+operatingsystemmajrelease: '8'
+operatingsystemrelease: '8.8'
+os:
+  family: Debian
+  lsb:
+    distcodename: jessie
+    distdescription: Debian GNU/Linux 8.8 (jessie)
+    distid: Debian
+    distrelease: '8.8'
+    majdistrelease: '8'
+    minordistrelease: '8'
+    release: core-2.0-amd64:core-2.0-noarch:core-3.0-amd64:core-3.0-noarch:core-3.1-amd64:core-3.1-noarch:core-3.2-amd64:core-3.2-noarch:core-4.0-amd64:core-4.0-noarch:core-4.1-amd64:core-4.1-noarch:security-4.0-amd64:security-4.0-noarch:security-4.1-amd64:security-4.1-noarch
+  name: Debian
+  release:
+    full: '8.8'
+    major: '8'
+    minor: '8'
+osfamily: Debian
+partitions:
+  xvda1:
+    label: biosboot
+    size: '14336'
+  xvda2:
+    filesystem: ext2
+    label: primary
+    mount: "/boot"
+    size: '360448'
+    uuid: 09809809-0980-0980-0980-098098098098
+  xvda3:
+    filesystem: LVM2_member
+    label: Linux LVM
+    size: '41551839'
+physicalprocessorcount: 1
+processor0: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+processor1: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+processor2: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+processor3: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+processorcount: 4
+processors:
+  count: 4
+  models:
+  - Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+  - Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+  - Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+  - Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+  physicalcount: 1
+productname: HVM domU
+ps: ps -ef
+puppet_environmentpath: ''
+region: us-east-1
+root_home: "/root"
+shorthost: somenode
+swapsize: 0.00 MB
+swapsize_mb: '0.00'
+timezone: UTC
+type: Other
+virtual: xenhvm
