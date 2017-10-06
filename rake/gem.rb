@@ -1,3 +1,11 @@
+## Releasing a new version of octofacts
+##
+## 1. Update `.version` with new version number
+## 2. Run `script/bootstrap` to update Gemfile.lock
+## 3. Commit changes, PR, and merge to master
+## 4. Check out master branch locally
+## 5. Run `bundle exec rake gem:release`
+
 require "fileutils"
 require "open3"
 require "shellwords"
