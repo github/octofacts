@@ -177,7 +177,15 @@ describe OctofactsUpdater::Fixture do
       obj.write_file(outfile)
 
       expect(File.file?(outfile)).to eq(true)
-      expect(File.read(outfile)).to eq(File.read(fixture_file))
+
+      # Different ruby versions or environments can cause the YAML generation to be slightly different.
+      # For example we ran into this diff:
+      #   -    uuid: 09809809-0980-0980-0980-098098098098
+      #   +    uuid: '09809809-0980-0980-0980-098098098098'
+      # To avoid this parse the YAML and compare that instead.
+      fixture_yaml = YAML.safe_load(File.read(fixture_file))
+      generated_yaml = YAML.safe_load(File.read(outfile))
+      expect(generated_yaml).to eq(fixture_yaml)
     end
   end
 end
