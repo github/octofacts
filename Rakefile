@@ -1,4 +1,6 @@
+require "rake"
 require "rspec/core/rake_task"
+require_relative "rake/gem"
 
 namespace :octofacts do
   task :default => [:"octofacts:spec:octofacts", :"octofacts:spec:octofacts_updater", :"octofacts:spec:octofacts_integration"] do
