@@ -81,7 +81,7 @@ module Octofacts
         return self
       end
 
-      if facts.respond_to?(name)
+      if facts.respond_to?(name, false)
         if args[0].is_a?(String) || args[0].is_a?(Symbol)
           args[0] = string_or_symbolized_key(args[0])
         end
@@ -91,11 +91,11 @@ module Octofacts
       raise NameError, "Unknown method '#{name}' in #{self.class}"
     end
 
-    def respond_to?(method)
+    def respond_to?(method, include_all = false)
       camelized_name = (method.to_s).split("_").collect(&:capitalize).join
       super || Kernel.const_get("Octofacts::Manipulators::#{camelized_name}")
     rescue NameError
-      return facts.respond_to?(method)
+      return facts.respond_to?(method, include_all)
     end
 
     private
