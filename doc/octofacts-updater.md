@@ -133,6 +133,21 @@ octofacts-updater --config octofacts-updater.yaml --action reindex
 
 :information_source: If a file or directory path starts with `.` or `..`, the path is treated as relative to the configuration file itself. This allows you to specify locations within a Puppet code repository, without regard to where on the system `octofacts-updater` is actually installed. Of course, you can also use absolute paths (starting with `/`).
 
+## Using an External Node Classifier (ENC)
+
+If your Puppet setup uses an external node classifier (ENC), it may supply settings in its `parameters` hash that are treated as top level variables by Puppet code (like facts), and can be accessed in Puppet manifests. For example, if your ENC sets a top level parameter `app: application_name` then in your Puppet code, `$::app` will equal "application_name". Furthermore, `%{::app}` will be interpolated in a Hiera configuration file.
+
+To configure `octofacts-updater` to run your ENC when updating facts for a node, add the path to your ENC in the configuration file.
+
+```title=octofacts-updater.yaml
+enc:
+  path: /usr/local/sbin/enc.sh
+```
+
+Note that per conventions, all ENCs must take exactly one parameter (the hostname) and return output in YAML format. You do not need to indicate the hostname (via `%%NODE%%` or hard-coding) when configuring the ENC, because this is assumed.
+
+If the ENC returns `parameters` at the top level, these are merged in to the facts gathered for the node. In the case that the node and the ENC both contain the same key, the key from the ENC will be used.
+
 ## Anonymizing and rewriting facts
 
 To avoid committing sensitive information into source control, and to prevent rspec-puppet tests from inadvertently contacting actual systems, `octofacts-updater` supports anonymizing and rewriting facts. For example, you might remove or scramble SSH keys, delete or hard-code facts like system uptime that change upon each run, or change IP addresses.
