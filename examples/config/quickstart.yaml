@@ -31,9 +31,19 @@
 # without explicitly naming a node, list the facts here that you would like to have indexed.
 # You can also specify the path to the index file. Be sure to adjust it for your site.
 index:
-  file: /var/lib/jenkins/workspace/puppet/spec/fixtures/facts/octofacts-index.yaml
+  file: ../spec/fixtures/facts/octofacts-index.yaml
+  node_path: ../spec/fixtures/facts/octofacts
   indexed_facts:
+    - app
+    - role
     - virtual
+
+# If you are using an external node classifier (ENC) you can import its results into octofacts
+# by having the octofacts-updater run the ENC as the node's facts are obtained. Anything in the
+# ENC's "parameters" hash will be configured as a fact and override the facts from the data source.
+# Provide the path to your ENC script here.
+# enc:
+#   path: ./config/enc.sh
 
 # This section cleans up and anonymizes facts. We have added a number of facts to this list
 # that contain sensitive information or change frequently. You should add any facts from your

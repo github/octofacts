@@ -99,6 +99,55 @@ Note that `facter` may need to run as root to gather all of the facts for the sy
 
 Also, if you are using Puppet 4 or later, but are relying on "legacy" facts that were used in Puppet 3, you may need to add `--show-legacy` to the `facter` command line.
 
+## Indexing facts
+
+`octofacts` supports an index of facts, allowing you to select fixtures dynamically based on parameters, rather than by specifying the name of a specific file in your tests. When properly set up, the use of an index in rspec-puppet tests will look like this example:
+
+```
+let(:facts) { Octofacts.from_index(app: "my_app", role: "my_role") }
+```
+
+To set up the index, you need to configure three settings:
+
+- `file`: The absolute or relative path to the index file.
+- `node_path`: The absolute or relative path to the directory where fixtures for nodes are stored.
+- `indexed_facts`: An array of facts that you want to index. For the example above, you would need to index the `app` and `role` facts.
+
+In your configuration, this might look like:
+
+```title=octofacts-updater.yaml
+index:
+  file: ../spec/fixtures/facts/octofacts-index.yaml
+  node_path: ../spec/fixtures/facts/octofacts
+  indexed_facts:
+    - app
+    - role
+```
+
+Once you have configured the index, you can use `octofacts-updater` to build the index from the node fixtures you already have.
+
+```
+touch spec/fixtures/facts/octofacts-index.yaml
+octofacts-updater --config octofacts-updater.yaml --action reindex
+```
+
+:information_source: If a file or directory path starts with `.` or `..`, the path is treated as relative to the configuration file itself. This allows you to specify locations within a Puppet code repository, without regard to where on the system `octofacts-updater` is actually installed. Of course, you can also use absolute paths (starting with `/`).
+
+## Using an External Node Classifier (ENC)
+
+If your Puppet setup uses an external node classifier (ENC), it may supply settings in its `parameters` hash that are treated as top level variables by Puppet code (like facts), and can be accessed in Puppet manifests. For example, if your ENC sets a top level parameter `app: application_name` then in your Puppet code, `$::app` will equal "application_name". Furthermore, `%{::app}` will be interpolated in a Hiera configuration file.
+
+To configure `octofacts-updater` to run your ENC when updating facts for a node, add the path to your ENC in the configuration file.
+
+```title=octofacts-updater.yaml
+enc:
+  path: /usr/local/sbin/enc.sh
+```
+
+Note that per conventions, all ENCs must take exactly one parameter (the hostname) and return output in YAML format. You do not need to indicate the hostname (via `%%NODE%%` or hard-coding) when configuring the ENC, because this is assumed.
+
+If the ENC returns `parameters` at the top level, these are merged in to the facts gathered for the node. In the case that the node and the ENC both contain the same key, the key from the ENC will be used.
+
 ## Anonymizing and rewriting facts
 
 To avoid committing sensitive information into source control, and to prevent rspec-puppet tests from inadvertently contacting actual systems, `octofacts-updater` supports anonymizing and rewriting facts. For example, you might remove or scramble SSH keys, delete or hard-code facts like system uptime that change upon each run, or change IP addresses.

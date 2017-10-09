@@ -19,7 +19,7 @@ This pull request [introduces/changes/removes] [functionality/feature].
 ## Checklist
 
 - [ ] Make sure that all of the tests pass, and fix any that don't. Just run `bundle exec rake` in your checkout directory, or review the CI job triggered whenever you push to a pull request.
-- [ ] Make sure that there is 100% test coverage (the CI job will test for this). You can ignore untestable sections of code with `# :nocov` comments. If you need help getting to 100% coverage please ask; however, don't just submit code with no tests.
+- [ ] Make sure that there is 100% test coverage (the CI job will test for this). You can ignore untestable sections of code with `# :nocov:` comments. If you need help getting to 100% coverage please ask; however, don't just submit code with no tests.
 - [ ] If you have added any new gem dependencies, make sure those gems are licensed under the MIT or Apache 2.0 license. We cannot add any dependencies on gems licensed under GPL.
 - [ ] If you have added any new gem dependencies, make sure you've checked in a copy of the `.gem` file into the [vendor/cache](/vendor/cache) directory.
 

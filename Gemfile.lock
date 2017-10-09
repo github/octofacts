@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    octofacts (0.5.0)
-    octofacts-updater (0.5.0)
+    octofacts (0.5.1)
+    octofacts-updater (0.5.1)
       diffy (>= 3.1.0)
       net-ssh (>= 2.9)
       octocatalog-diff (>= 1.4.1)

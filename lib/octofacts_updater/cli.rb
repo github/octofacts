@@ -16,8 +16,8 @@ module OctofactsUpdater
         end
 
         opts.on("-c", "--config <config_file>", String, "Path to configuration file") do |f|
-          raise "Invalid configuration file" unless File.file?(f)
-          @opts[:config] = f
+          @opts[:config] = File.expand_path(f)
+          raise "Invalid configuration file #{@opts[:config].inspect}" unless File.file?(@opts[:config])
         end
 
         opts.on("-H", "--hostname <hostname>", String, "FQDN of the host whose facts are to be gathered") do |h|
@@ -67,11 +67,12 @@ module OctofactsUpdater
     end
 
     def usage
-      puts "Usage: octofacts-updater --action <action> [--config-file /path/to/config.yaml] [other options]"
+      puts "Usage: octofacts-updater --action <action> [--config /path/to/config.yaml] [other options]"
       puts ""
       puts "Available actions:"
-      puts "  bulk:  Update fixtures and index in bulk"
-      puts "  facts: Obtain facts for one node (requires --hostname <hostname>)"
+      puts "  bulk:    Update fixtures and index in bulk"
+      puts "  facts:   Obtain facts for one node (requires --hostname <hostname>)"
+      puts "  reindex: Build a new index from the existing fact fixtures"
       puts ""
     end
 
@@ -106,6 +107,7 @@ module OctofactsUpdater
 
       return handle_action_bulk if opts[:action] == "bulk"
       return handle_action_facts if opts[:action] == "facts"
+      return handle_action_bulk if opts[:action] == "reindex"
 
       usage
       exit 255
@@ -126,19 +128,39 @@ module OctofactsUpdater
       end
     end
 
-    def handle_action_bulk
-      facts_to_index = @config.fetch("index", {})["indexed_facts"]
-      unless facts_to_index.is_a?(Array)
-        raise ArgumentError, "Must declare index:indexed_facts in configuration to use bulk update"
-      end
+    def nodes_for_bulk
+      if opts[:action] == "reindex"
+        @opts[:quick] = true
 
-      nodes = if opts[:host_list]
+        path = if opts[:path]
+          File.expand_path(opts[:path])
+        elsif @config.fetch("index", {})["node_path"]
+          File.expand_path(@config.fetch("index", {})["node_path"], File.dirname(opts[:config]))
+        else
+          raise ArgumentError, "Must set --path, or define index:node_path to a valid directory in configuration"
+        end
+
+        unless File.directory?(path)
+          raise Errno::ENOENT, "--path must be a directory (#{path.inspect} is not)"
+        end
+
+        Dir.glob("#{path}/*.yaml").map { |f| File.basename(f, ".yaml") }
+      elsif opts[:host_list]
         opts[:host_list]
       elsif opts[:hostname]
         [opts[:hostname]]
       else
         OctofactsUpdater::FactIndex.load_file(index_file).nodes(true)
       end
+    end
+
+    def handle_action_bulk
+      facts_to_index = @config.fetch("index", {})["indexed_facts"]
+      unless facts_to_index.is_a?(Array)
+        raise ArgumentError, "Must declare index:indexed_facts in configuration to use bulk update"
+      end
+
+      nodes = nodes_for_bulk
       if nodes.empty?
         raise ArgumentError, "Cannot run bulk update with no nodes to check"
       end
