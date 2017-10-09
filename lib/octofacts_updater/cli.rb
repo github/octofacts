@@ -67,7 +67,7 @@ module OctofactsUpdater
     end
 
     def usage
-      puts "Usage: octofacts-updater --action <action> [--config-file /path/to/config.yaml] [other options]"
+      puts "Usage: octofacts-updater --action <action> [--config /path/to/config.yaml] [other options]"
       puts ""
       puts "Available actions:"
       puts "  bulk:    Update fixtures and index in bulk"
