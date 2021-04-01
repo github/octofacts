@@ -64,7 +64,7 @@ GEM
       locale (~> 2.1)
     rainbow (2.2.2)
       rake
-    rake (10.5.0)
+    rake (12.3.3)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
       rspec-expectations (~> 3.6.0)
@@ -115,7 +115,7 @@ DEPENDENCIES
   parallel (= 1.12.0)
   pry (~> 0.10)
   puppet (~> 4.10.4)
-  rake (~> 10.0)
+  rake (~> 12.3)
   rspec-puppet (~> 2.6.2)
   rubocop-github (~> 0.5.0)
   simplecov (>= 0.14.1)

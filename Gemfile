@@ -6,7 +6,7 @@ gemspec name: "octofacts-updater"
 group :development do
   gem "parallel", "= 1.12.0"
   gem "pry", "~> 0.10"
-  gem "rake", "~> 10.0"
+  gem "rake", "~> 12.3"
   gem "rubocop-github", "~> 0.5.0"
   gem "simplecov", ">= 0.14.1"
   gem "simplecov-json", "~> 0.2"
