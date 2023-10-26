@@ -33,7 +33,7 @@ GEM
     hiera (3.3.1)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    json (2.1.0)
+    json (2.5.1)
     json_pure (1.8.6)
     locale (2.1.2)
     method_source (0.8.2)
