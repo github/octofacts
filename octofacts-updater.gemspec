@@ -23,7 +23,7 @@ EOS
 
   spec.required_ruby_version = ">= 2.1.0"
   spec.add_dependency "diffy", ">= 3.1.0"
-  spec.add_dependency "octocatalog-diff", ">= 2.1.0"
-  spec.add_dependency "octokit", ">= 8.0.0"
-  spec.add_dependency "net-ssh", ">= 7.2.0"
+  spec.add_dependency "octocatalog-diff", ">= 1.4.1"
+  spec.add_dependency "octokit", ">= 4.2.0"
+  spec.add_dependency "net-ssh", ">= 2.9"
 end
