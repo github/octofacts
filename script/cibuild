@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rspec_puppet_versions="2.3.2 2.4.0 2.5.0 2.6.2"
+rspec_puppet_versions="2.3.2 2.4.0 2.5.0 2.6.4"
 puppet_versions="4.10.4"
 
 set -e
