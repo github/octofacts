@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Octofacts
   # Octofacts.from_file(filename, options) - Construct Octofacts::Facts from a filename.
   #

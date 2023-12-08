@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "manipulators/replace"
 
 # Octofacts::Manipulators - our fact manipulation API.

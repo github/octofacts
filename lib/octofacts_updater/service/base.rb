@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This contains handy utility methods that might be used in any of the other classes.
 
 require "yaml"

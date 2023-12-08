@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class represents a fact, either structured or unstructured.
 # The fact has a name and a value. The name is a string, and the value
 # can either be a string/integer/boolean (unstructured) or a hash (structured).

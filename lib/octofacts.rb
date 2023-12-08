@@ -1,3 +1,4 @@
+# frozen_literal_string: true
 require "octofacts/constructors/from_file"
 require "octofacts/constructors/from_index"
 require "octofacts/manipulators"

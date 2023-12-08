@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This file is part of the octofacts updater fact manipulation plugins. This plugin provides
 # methods to update facts that are IP addresses in order to anonymize or randomize them.
 

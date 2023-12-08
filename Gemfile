@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 source "https://rubygems.org"
+
 
 gemspec name: "octofacts"
 gemspec name: "octofacts-updater"
@@ -12,6 +14,6 @@ group :development do
   gem "simplecov-json", "~> 0.2"
 
   # Integration test
-  gem "rspec-puppet", "~> #{ENV['RSPEC_PUPPET_VERSION'] || '2.6.2'}"
   gem "puppet", "~> #{ENV['PUPPET_VERSION'] || '4.10.4'}"
+  gem "rspec-puppet", "~> #{ENV['RSPEC_PUPPET_VERSION'] || '2.6.2'}"
 end

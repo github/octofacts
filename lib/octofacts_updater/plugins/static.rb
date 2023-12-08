@@ -1,4 +1,5 @@
 # This file is part of the octofacts updater fact manipulation plugins. This plugin provides
+# frozen_string_literal: true
 # methods to do static operations on facts -- delete, add, or set to a known value.
 
 # Delete. This method deletes the fact or the identified portion. Setting the value to nil

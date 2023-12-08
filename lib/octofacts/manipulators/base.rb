@@ -1,3 +1,4 @@
+# # frozen_string_literal: true
 module Octofacts
   class Manipulators
     # Delete a fact from a hash.

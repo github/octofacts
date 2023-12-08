@@ -1,4 +1,5 @@
 # This file is part of the octofacts updater fact manipulation plugins. This plugin provides
+# frozen_string_literal: true
 # methods to update facts that are SSH keys, since we do not desire to commit SSH keys from
 # actual hosts into the source code repository.
 

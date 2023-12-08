@@ -1,3 +1,4 @@
+# frozen_literal_string: true
 require "yaml"
 require "set"
 
