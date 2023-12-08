@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Make sure the examples in the README document actually work. :-)
 
 require "spec_helper"

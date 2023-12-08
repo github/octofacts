@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+#
 require "spec_helper"
 
 # FIXME: Remove when real specs are added

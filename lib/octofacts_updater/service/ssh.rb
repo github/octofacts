@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class interacts with a puppetserver to obtain facts from that server's YAML cache.
 # This is achieved by SSH-ing to the server and obtaining the fact file directly from the
 # puppetserver's cache. This can also be used to SSH to an actual node and run a command,

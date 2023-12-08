@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Octofacts
   class Spec
     def self.fixture_root

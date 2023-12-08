@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe "sshfp_randomize plugin" do
   let(:plugin) { OctofactsUpdater::Plugin.plugins[:sshfp_randomize] }
   let(:value) { "SSHFP 1 1 0123456789abcdef0123456789abcdef01234567\nSSHFP 1 2 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" }
-  let(:args) {{ "plugin" => "sshfp_randomize" }}
+  let(:args) { { "plugin" => "sshfp_randomize" } }
 
   it "should be defined" do
     expect(plugin).to be_a_kind_of(Proc)

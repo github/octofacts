@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe OctofactsUpdater::Service::SSH do
@@ -8,19 +9,19 @@ describe OctofactsUpdater::Service::SSH do
     context "when ssh is not configured" do
       it "should raise ArgumentError when ssh is undefined" do
         config = {}
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires ssh section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires ssh section/)
       end
 
       it "should raise ArgumentError when ssh is not a hash" do
         config = {"ssh" => :do_it}
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires ssh section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires ssh section/)
       end
     end
 
     context "when ssh is configured" do
       it "should raise error if no server is configured" do
         config = { "ssh" => {} }
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'server' in the ssh section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'server' in the ssh section/)
       end
 
       context "when user is unspecified" do
@@ -38,14 +39,14 @@ describe OctofactsUpdater::Service::SSH do
 
         it "should raise error if no user is configured" do
           config = { "ssh" => { "server" => "puppetserver.example.net" } }
-          expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'user' in the ssh section/)
+          expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'user' in the ssh section/)
         end
 
         it "should use USER from environment if no user is configured" do
           ENV["USER"] = "ssh-user-from-env"
           config = { "ssh" => { "server" => "puppetserver.example.net" } }
           expect(Net::SSH).to receive(:start).with("puppetserver.example.net", "ssh-user-from-env", {}).and_raise(custom_exception)
-          expect{ described_class.facts(node, config) }.to raise_error(custom_exception)
+          expect { described_class.facts(node, config) }.to raise_error(custom_exception)
         end
       end
 

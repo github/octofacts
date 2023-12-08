@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe OctofactsUpdater::Service::LocalFile do
@@ -8,12 +9,12 @@ describe OctofactsUpdater::Service::LocalFile do
     context "when localfile is not configured" do
       it "should raise ArgumentError when localfile is undefined" do
         config = {}
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires localfile section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires localfile section/)
       end
 
       it "should raise ArgumentError when localfile is not a hash" do
         config = {"localfile" => :do_it}
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires localfile section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires localfile section/)
       end
     end
 
@@ -22,12 +23,12 @@ describe OctofactsUpdater::Service::LocalFile do
 
       it "should raise error if the path is undefined" do
         config = { "localfile" => {} }
-        expect{ described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'path' in the localfile section/)
+        expect { described_class.facts(node, config) }.to raise_error(ArgumentError, /requires 'path' in the localfile section/)
       end
 
       it "should raise error if the path does not exist" do
         config = { "localfile" => { "path" => File.join(file_path, "missing.yaml") } }
-        expect{ described_class.facts(node, config) }.to raise_error(Errno::ENOENT, /LocalFile cannot find a file at/)
+        expect { described_class.facts(node, config) }.to raise_error(Errno::ENOENT, /LocalFile cannot find a file at/)
       end
 
       it "should return the proper object from the parsed file" do

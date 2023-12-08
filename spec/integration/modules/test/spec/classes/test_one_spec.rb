@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "../../../../spec/spec_helper"
 
 describe "test::one" do
@@ -7,7 +8,7 @@ describe "test::one" do
     let(:facts) do
       {
         ec2: true,
-        ec2_metadata: { placement: { :"availability-zone" => "us-foo-1a" } },
+        ec2_metadata: { placement: { :"availability-zone" : "us-foo-1a" } },
         gid: "root",
         id: "root"
       }

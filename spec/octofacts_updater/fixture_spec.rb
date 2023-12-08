@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe OctofactsUpdater::Fixture do
   describe "#make" do
     let(:hostname) { "HostName" }
-    let(:config) {{ "enc" => { "path" => "/foo" }, "puppetdb" => { "url" => "https://puppetdb.example.com:8081" } }}
-    let(:enc_return) {{ "parameters" => { "fizz" => "buzz" }, "classes" => ["class1", "class2"] }}
-    let(:fact_hash_with_values) {{ "name" => hostname, "values" => { "foo" => "bar" } }}
+    let(:config) { { "enc" => { "path" => "/foo" }, "puppetdb" => { "url" => "https://puppetdb.example.com:8081" } } }
+    let(:enc_return) { { "parameters" => { "fizz" => "buzz" }, "classes" => ["class1", "class2"] } }
+    let(:fact_hash_with_values) { { "name" => hostname, "values" => { "foo" => "bar" } } }
 
     it "should instantiate and return a fixture object with the given facts" do
       expect(OctofactsUpdater::Service::ENC).to receive(:run_enc).with(hostname, config).and_return(enc_return)
