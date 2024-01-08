@@ -7,13 +7,13 @@ namespace :octofacts do
   end
 end
 
-RSpec::Core::RakeTask.new(:octofacts:spec:octofacts) do |t|
+RSpec::Core::RakeTask.new(:"octofacts:spec:octofacts") do |t|
   t.pattern = File.join(File.dirname(__FILE__), "spec/octofacts/**/*_spec.rb")
   t.name = "octofacts"
   ENV["SPEC_NAME"] = "octofacts"
 end
 
-RSpec::Core::RakeTask.new(:octofacts:spec:octofacts_updater) do |t|
+RSpec::Core::RakeTask.new(:"octofacts:spec:octofacts_updater") do |t|
   t.pattern = File.join(File.dirname(__FILE__), "spec/octofacts_updater/**/*_spec.rb")
   t.name = "octofacts-updater"
   ENV["SPEC_NAME"] = "octofacts_updater"
