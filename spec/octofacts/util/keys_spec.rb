@@ -8,7 +8,7 @@ describe Octofacts::Util::Keys do
     it "should work" do
       f = facts
       result = described_class.downcase_keys!(f)
-      expect(f).to eq({"foo": "foo-value", baz: "baz-value", "bar": "bar-value", buzz: "buzz-value"})
+      expect(f).to eq({foo: "foo-value", baz: "baz-value", bar: "bar-value", buzz: "buzz-value"})
       expect(result).to eq({"foo": "foo-value", baz: "baz-value", "bar": "bar-value", buzz: "buzz-value"})
     end
   end
