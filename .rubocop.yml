@@ -3,7 +3,6 @@ inherit_gem:
     - config/default.yml
 
 AllCops:
+  NewCops: enable
   DisplayCopNames: true
-
-AllCops:
   TargetRubyVersion: 2.6

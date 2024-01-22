@@ -134,12 +134,12 @@ module OctofactsUpdater
         @opts[:quick] = true
 
         path = if opts[:path]
-          File.expand_path(opts[:path])
-        elsif @config.fetch("index", {})["node_path"]
-          File.expand_path(@config.fetch("index", {})["node_path"], File.dirname(opts[:config]))
-        else
-          raise ArgumentError, "Must set --path, or define index:node_path to a valid directory in configuration"
-        end
+                 File.expand_path(opts[:path])
+               elsif @config.fetch("index", {})["node_path"]
+                 File.expand_path(@config.fetch("index", {})["node_path"], File.dirname(opts[:config]))
+               else
+                 raise ArgumentError, "Must set --path, or define index:node_path to a valid directory in configuration"
+               end
 
         unless File.directory?(path)
           raise Errno::ENOENT, "--path must be a directory (#{path.inspect} is not)"

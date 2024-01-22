@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "yaml"
 require "set"
 
@@ -7,7 +8,6 @@ module Octofacts
     class Index < Base
       attr_reader :index_path, :fixture_path, :options
       attr_writer :facts
-      attr_accessor :nodes
 
       def initialize(args = {})
         index_path = Octofacts::Util::Config.fetch(:octofacts_index_path, args)
