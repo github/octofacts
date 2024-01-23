@@ -5,7 +5,7 @@
 ## 3. Commit changes, PR, and merge to master
 ## 4. Check out master branch locally
 ## 5. Run `bundle exec rake gem:release`
-
+# frozen_string_literal: true
 require "fileutils"
 require "open3"
 require "shellwords"

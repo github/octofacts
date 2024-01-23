@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "octofacts_updater/cli"
 require "octofacts_updater/fact"
 require "octofacts_updater/fact_index"

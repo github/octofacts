@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe "delete plugin" do
@@ -112,7 +113,7 @@ end
 describe "randomize_long_string plugin" do
   let(:plugin) { OctofactsUpdater::Plugin.plugins[:randomize_long_string] }
   let(:value) { "1234567890abcdef" }
-  let(:args) {{ "plugin" => "randomize_long_string" }}
+  let(:args) { { "plugin" => "randomize_long_string" } }
 
   it "should be defined" do
     expect(plugin).to be_a_kind_of(Proc)

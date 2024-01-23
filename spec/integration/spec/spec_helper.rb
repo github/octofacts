@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # spec_helper for rspec-puppet fixture
 
 require_relative "../../../lib/octofacts"

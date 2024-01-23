@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class interacts with puppetdb to pull the facts from the recent
 # run of Puppet on a given node. This uses octocatalog-diff on the back end to
 # pull the facts from puppetdb.

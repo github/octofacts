@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Octofacts
   module Backends
     # This is a template class to define the minimum API to be implemented

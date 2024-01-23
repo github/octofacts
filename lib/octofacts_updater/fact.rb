@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class represents a fact, either structured or unstructured.
 # The fact has a name and a value. The name is a string, and the value
 # can either be a string/integer/boolean (unstructured) or a hash (structured).
@@ -65,20 +66,20 @@ module OctofactsUpdater
       end
 
       parts = if name_in.is_a?(String)
-        name_in.split("::")
-      elsif name_in.is_a?(Array)
-        name_in.map do |item|
-          if item.is_a?(String)
-            item
-          elsif item.is_a?(Hash) && item.key?("regexp")
-            Regexp.new(item["regexp"])
-          else
-            raise ArgumentError, "Unable to interpret structure item: #{item.inspect}"
-          end
-        end
-      else
-        raise ArgumentError, "Unable to interpret structure: #{name_in.inspect}"
-      end
+                name_in.split("::")
+              elsif name_in.is_a?(Array)
+                name_in.map do |item|
+                  if item.is_a?(String)
+                    item
+                  elsif item.is_a?(Hash) && item.key?("regexp")
+                    Regexp.new(item["regexp"])
+                  else
+                    raise ArgumentError, "Unable to interpret structure item: #{item.inspect}"
+                  end
+                end
+              else
+                raise ArgumentError, "Unable to interpret structure: #{name_in.inspect}"
+              end
 
       set_structured_value(@value, parts, new_value)
     end

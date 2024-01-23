@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "../../../../spec/spec_helper"
 
 describe "test::one" do
@@ -7,7 +8,7 @@ describe "test::one" do
     let(:facts) do
       {
         ec2: true,
-        ec2_metadata: { placement: { :"availability-zone" => "us-foo-1a" } },
+        ec2_metadata: { placement: { "availability-zone": "us-foo-1a" } },
         gid: "root",
         id: "root"
       }
@@ -71,7 +72,7 @@ describe "test::one" do
   end
 
   context "using straight octofacts from file with manipulation of symbol converted to hash" do
-    let(:facts) { Octofacts.from_file("basic.yaml").replace(:"ec2_metadata::placement::availability-zone" => "us-hats-1a").facts }
+    let(:facts) { Octofacts.from_file("basic.yaml").replace("ec2_metadata::placement::availability-zone": "us-hats-1a").facts }
 
     it "should contain the file resource" do
       is_expected.to contain_file("/tmp/system-info.txt").with(

@@ -3,7 +3,10 @@ inherit_gem:
     - config/default.yml
 
 AllCops:
+  NewCops: enable
   DisplayCopNames: true
+  TargetRubyVersion: 2.6
 
-AllCops:
-  TargetRubyVersion: 2.1
+Style/HashSyntax:
+  Exclude:
+    - spec/octofacts/util/keys_spec.rb

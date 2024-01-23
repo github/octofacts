@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "yaml"
 require "set"
 
@@ -6,7 +8,6 @@ module Octofacts
     class Index < Base
       attr_reader :index_path, :fixture_path, :options
       attr_writer :facts
-      attr_accessor :nodes
 
       def initialize(args = {})
         index_path = Octofacts::Util::Config.fetch(:octofacts_index_path, args)
@@ -44,7 +45,7 @@ module Octofacts
           add_fact_to_index(key) unless indexed_fact?(key)
           matching_nodes = index[key][value.to_s]
           raise Octofacts::Errors::NoFactsError if matching_nodes.nil?
-          self.nodes = nodes & matching_nodes
+          @nodes = nodes & matching_nodes
         end
 
         self
@@ -61,7 +62,7 @@ module Octofacts
           end
         end
 
-        self.nodes = matching_nodes
+        @nodes = matching_nodes
         self
       end
 
@@ -71,7 +72,7 @@ module Octofacts
           add_fact_to_index(key) unless indexed_fact?(key)
           matching_nodes = index[key][value.to_s]
           unless matching_nodes.nil?
-            self.nodes = (matching_nodes.to_set + nodes.to_set).to_a
+            @nodes = (matching_nodes.to_set + nodes.to_set).to_a
           end
         end
 

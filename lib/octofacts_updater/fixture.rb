@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class represents a fact fixture, which is a set of facts along with a node name.
 # Facts are OctofactsUpdater::Fact objects, and internally are stored as a hash table
 # with the key being the fact name and the value being the OctofactsUpdater::Fact object.

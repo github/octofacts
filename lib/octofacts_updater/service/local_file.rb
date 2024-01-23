@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class reads a YAML file from the local file system so that it can be used as a source
 # in octofacts-updater. This was originally intended for a quickstart tutorial, since it requires
 # no real configuration. However it could also be used in production, if the user wants to create

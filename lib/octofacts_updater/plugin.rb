@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class provides the base methods for fact manipulation plugins.
 
 require "digest"
@@ -61,7 +62,8 @@ module OctofactsUpdater
     #
     # Returns a String with the same length as string_in.
     def self.randomize_long_string(string_in)
-      seed = Digest::MD5.hexdigest(string_in).to_i(36)
+      seed = Digest::SHA512.hexdigest(string_in).to_i(36)
+
       prng = Random.new(seed)
       chars = [("a".."z"), ("A".."Z"), ("0".."9")].flat_map(&:to_a)
       (1..(string_in.length)).map { chars[prng.rand(chars.length)] }.join

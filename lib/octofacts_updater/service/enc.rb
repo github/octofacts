@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class contains methods to interact with an external node classifier.
 
 require "open3"

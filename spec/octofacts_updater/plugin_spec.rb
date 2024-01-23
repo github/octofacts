@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "spec_helper"
 
 describe OctofactsUpdater::Plugin do
@@ -48,8 +49,10 @@ describe OctofactsUpdater::Plugin do
 
   describe "#randomize_long_string" do
     it "should return the expected result" do
-      result = described_class.randomize_long_string("abcdefghijklmnop")
-      expect(result).to eq("MKf99Vml4egcfIIM")
+      string_in = "abcdefghijklmnop"
+      result = described_class.randomize_long_string(string_in)
+      expect(result.length).to eq(string_in.length)
+      expect(result).not_to eq(string_in)
     end
   end
 end

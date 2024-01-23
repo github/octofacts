@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Retrieves configuration parameters from:
 #   - input hash
 #   - rspec configuration

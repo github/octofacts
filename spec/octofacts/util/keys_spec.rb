@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 describe Octofacts::Util::Keys do
   describe "#downcase_keys!" do
     let(:facts) do

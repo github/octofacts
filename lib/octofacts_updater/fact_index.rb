@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class represents a fact index, which is ultimately represented by a YAML file of
 # each index fact, the values seen, and the node(s) containing each value.
 #

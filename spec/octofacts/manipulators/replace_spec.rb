@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 require "spec_helper"
 require "yaml"
 
-describe Octofacts::Manipulators::Set do
+describe Octofacts::Manipulators do
   before(:each) do
     fixture = File.join(Octofacts::Spec.fixture_root, "facts", "basic.yaml")
     @obj = Octofacts.from_file(fixture)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Octofacts
   class Errors
     class FactNotIndexed < RuntimeError; end

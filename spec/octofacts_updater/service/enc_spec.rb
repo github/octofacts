@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 require "ostruct"
 
 describe OctofactsUpdater::Service::ENC do
-  let(:config) {{ "enc" => { "path" => "/tmp/foo.enc" }}}
+  let(:config) { { "enc" => { "path" => "/tmp/foo.enc" }} }
 
   describe "#run_enc" do
     it "should raise ArgumentError if no configuration for the ENC is defined" do

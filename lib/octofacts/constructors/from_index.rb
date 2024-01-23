@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Octofacts
   # Octofacts.from_index(options) - Construct Octofacts::Facts from an index file.
   #
