@@ -85,7 +85,7 @@ module Octofacts
     def self.tag
       # Make sure we have not released this version before
       exec_command("git fetch -t origin")
-      tags = exec_command("git tag -l").split(/\n/)
+      tags = exec_command("git tag -l").split("\n")
       raise "There is already a #{version} tag" if tags.include?(version)
 
       # Tag it
