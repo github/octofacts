@@ -5,11 +5,38 @@ updates:
   - package-ecosystem: bundler
     directory: /
     schedule:
-      interval: daily
+      interval: weekly
+    groups:
+      bundler-dev:
+        patterns:
+          - parallel
+          - pry
+          - rake
+          - rubocop-github
+          - simplecov*
+        update-types:
+          - patch
+          - minor
+      bundler-prod:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - parallel
+          - pry
+          - rake
+          - rubocop-github
+          - simplecov*
+        update-types:
+          - patch
+          - minor
     open-pull-requests-limit: 20
     vendor: true
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: daily
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - '*'
     open-pull-requests-limit: 20
