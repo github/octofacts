@@ -17,5 +17,5 @@ EOS
   spec.files         = [Dir.glob("lib/octofacts/**/*.rb"), "lib/octofacts.rb", ".version"].flatten
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.1.0"
+  spec.required_ruby_version = ">= 2.5.0"
 end

@@ -22,7 +22,7 @@ EOS
   ].flatten
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.1.0"
+  spec.required_ruby_version = ">= 2.5.0"
   spec.add_dependency "diffy", ">= 3.1.0"
   spec.add_dependency "octocatalog-diff", ">= 2.1.0"
   spec.add_dependency "octokit", ">= 4.2.0"
