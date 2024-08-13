@@ -1,12 +1,14 @@
 name: Lint (Rubocop)
 on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
   rubocop:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@a6e6f86333f0a2523ece813039b8b4be04560854 # v1.190.0
       - name: Install dependencies
         run: |
           bundle install --jobs 4 --retry 3
