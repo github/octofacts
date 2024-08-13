@@ -1,13 +1,19 @@
 name: Integration Tests
-on: [push, pull_request, workflow_dispatch]
+on: [pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
   integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@a6e6f86333f0a2523ece813039b8b4be04560854 # v1.190.0
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
       - name: Run Integration Tests
-        run: ./integration_tests.sh
+        run: bundle exec rake octofacts:spec:octofacts_integration && local_integration_rspec=$? || local_integration_rspec=$?
+          if [ "$local_integration_rspec" -ne 0 ]; then exit 1; else exit 0; fi
+    environment:
+      RSPEC_PUPPET_VERSION="3.0.0"
+      PUPPET_VERSION="7.30.0"
