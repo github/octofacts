@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require "spec_helper"
 
+require "base64"
 require "ostruct"
 
 describe OctofactsUpdater::Service::GitHub do
