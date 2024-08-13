@@ -1,0 +1,13 @@
+name: Integration Tests
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: Run Integration Tests
+        run: ./integration_tests.sh

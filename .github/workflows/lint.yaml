@@ -1,0 +1,15 @@
+name: Lint (Rubocop)
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install dependencies
+        run: |
+          bundle install --jobs 4 --retry 3
+      - name: Lint with Rubocop
+        run: |
+          bundle exec rubocop --parallel
