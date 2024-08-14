@@ -57,7 +57,7 @@ describe OctofactsUpdater::Service::SSH do
         allow(ssh_result).to receive(:exitstatus).and_return(1)
         allow(ssh_result).to receive(:to_s).and_return("Failed to cat foo: no such file or directory")
         expect(ssh).to receive(:"exec!").and_return(ssh_result)
-        expect(Net::SSH).to receive(:start).with("puppetserver.example.net", "foo", extra: "bar").and_yield(ssh)
+        allow(Net::SSH).to receive(:start).with("puppetserver.example.net", "foo", hash_including(extra: "bar")).and_yield(ssh)
         expect { described_class.facts(node, config) }.to raise_error(/ssh failed with exitcode=1: Failed to cat foo/)
       end
 
@@ -68,7 +68,7 @@ describe OctofactsUpdater::Service::SSH do
         allow(ssh_result).to receive(:exitstatus).and_return(0)
         allow(ssh_result).to receive(:to_s).and_return("---\nname: #{node}\nvalues:\n  foo: bar\n")
         expect(ssh).to receive(:"exec!").and_return(ssh_result)
-        expect(Net::SSH).to receive(:start).with("puppetserver.example.net", "foo", extra: "bar").and_yield(ssh)
+        expect(Net::SSH).to receive(:start).with("puppetserver.example.net", "foo", hash_including(extra: "bar")).and_yield(ssh)
         expect(described_class.facts(node, config)).to eq("name" => node, "values" => { "foo" => "bar" })
       end
     end

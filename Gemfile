@@ -14,6 +14,6 @@ group :development do
   gem "simplecov-json", "~> 0.2"
 
   # Integration test
-  gem "puppet", "~> #{ENV['PUPPET_VERSION'] || '6.25.1'}"
-  gem "rspec-puppet", "~> #{ENV['RSPEC_PUPPET_VERSION'] || '2.6.2'}"
+  gem "puppet", "~> #{ENV['PUPPET_VERSION'] || '7.30.0'}"
+  gem "rspec-puppet", "~> #{ENV['RSPEC_PUPPET_VERSION'] || '3.0.0'}"
 end
