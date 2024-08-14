@@ -2,8 +2,8 @@
 ##
 ## 1. Update `.version` with new version number
 ## 2. Run `script/bootstrap` to update Gemfile.lock
-## 3. Commit changes, PR, and merge to master
-## 4. Check out master branch locally
+## 3. Commit changes, PR, and merge to main
+## 4. Check out main branch locally
 ## 5. Run `bundle exec rake gem:release`
 # frozen_string_literal: true
 require "fileutils"
@@ -90,7 +90,7 @@ module Octofacts
 
       # Tag it
       exec_command("git tag #{Shellwords.escape(version)}")
-      exec_command("git push origin master")
+      exec_command("git push origin main")
       exec_command("git push origin #{Shellwords.escape(version)}")
     end
 
@@ -116,8 +116,8 @@ end
 namespace :gem do
   task "build" do
     branch = Octofacts::Gem.branch
-    unless branch == "master"
-      raise "On a non-master branch #{branch}; use gem:force-build if you really want to do this"
+    unless branch == "main"
+      raise "On a non-main branch #{branch}; use gem:force-build if you really want to do this"
     end
     Octofacts::Gem.build
   end
@@ -128,8 +128,8 @@ namespace :gem do
 
   task "force-build" do
     branch = Octofacts::Gem.branch
-    unless branch == "master"
-      warn "WARNING: Force-building from non-master branch #{branch}"
+    unless branch == "main"
+      warn "WARNING: Force-building from non-main branch #{branch}"
     end
     Octofacts::Gem.build
   end
@@ -140,15 +140,15 @@ namespace :gem do
 
   task "release" do
     branch = Octofacts::Gem.branch
-    unless branch == "master"
-      raise "On a non-master branch #{branch}; refusing to release"
+    unless branch == "main"
+      raise "On a non-main branch #{branch}; refusing to release"
     end
     [:check, :build, :tag, :push].each { |t| Rake::Task["gem:#{t}"].invoke }
   end
 
   task "tag" do
     branch = Octofacts::Gem.branch
-    raise "On a non-master branch #{branch}; refusing to tag" unless branch == "master"
+    raise "On a non-main branch #{branch}; refusing to tag" unless branch == "main"
     Octofacts::Gem.tag
   end
 

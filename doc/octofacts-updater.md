@@ -11,7 +11,7 @@ This document will help you address all of these security and automation non-opt
 The easiest way to get started with `octofacts-updater` is to download and install our "quickstart" configuration file. In the git repo, this is found at [/examples/config/quickstart.yaml](/examples/config/quickstart.yaml). If you'd like to download the latest version directly from GitHub, you can use wget, like this:
 
 ```
-wget -O octofacts-updater.yaml https://raw.githubusercontent.com/github/octofacts/master/examples/config/quickstart.yaml
+wget -O octofacts-updater.yaml https://raw.githubusercontent.com/github/octofacts/main/examples/config/quickstart.yaml
 ```
 
 ## Data sources

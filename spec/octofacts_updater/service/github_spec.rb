@@ -248,7 +248,7 @@ describe OctofactsUpdater::Service::GitHub do
   end
 
   describe "#ensure_branch_exists" do
-    let(:cfg) { { "github" => { "branch" => "foo", "repository" => "example/repo", "default_branch" => "master" } } }
+    let(:cfg) { { "github" => { "branch" => "foo", "repository" => "example/repo", "default_branch" => "main" } } }
     let(:octokit) { double("Octokit") }
     let(:subject) { described_class.new(cfg) }
 
@@ -264,18 +264,18 @@ describe OctofactsUpdater::Service::GitHub do
     context "when branch does not exist" do
       it "should create branch of Octokit::NotFound is raised" do
         allow(octokit).to receive(:branch).with("example/repo", "foo").and_raise(Octokit::NotFound)
-        allow(octokit).to receive(:branch).with("example/repo", "master").and_return(commit: { sha: "00abcdef" })
+        allow(octokit).to receive(:branch).with("example/repo", "main").and_return(commit: { sha: "00abcdef" })
         expect(octokit).to receive(:create_ref).with("example/repo", "heads/foo", "00abcdef")
-        expect(subject).to receive(:verbose).with("Created branch foo based on master 00abcdef.")
+        expect(subject).to receive(:verbose).with("Created branch foo based on main 00abcdef.")
         allow(subject).to receive(:octokit).and_return(octokit)
         expect(subject.send(:ensure_branch_exists)).to eq(true)
       end
 
       it "should create branch if .branch call returns nil" do
         allow(octokit).to receive(:branch).with("example/repo", "foo").and_return(nil)
-        allow(octokit).to receive(:branch).with("example/repo", "master").and_return(commit: { sha: "00abcdef" })
+        allow(octokit).to receive(:branch).with("example/repo", "main").and_return(commit: { sha: "00abcdef" })
         expect(octokit).to receive(:create_ref).with("example/repo", "heads/foo", "00abcdef")
-        expect(subject).to receive(:verbose).with("Created branch foo based on master 00abcdef.")
+        expect(subject).to receive(:verbose).with("Created branch foo based on main 00abcdef.")
         allow(subject).to receive(:octokit).and_return(octokit)
         expect(subject.send(:ensure_branch_exists)).to eq(true)
       end
@@ -283,7 +283,7 @@ describe OctofactsUpdater::Service::GitHub do
   end
 
   describe "#find_or_create_pull_request" do
-    let(:cfg) { { "github" => { "branch" => "foo", "repository" => "example/repo", "default_branch" => "master" } } }
+    let(:cfg) { { "github" => { "branch" => "foo", "repository" => "example/repo", "default_branch" => "main" } } }
     let(:subject) { described_class.new(cfg) }
     let(:pr) { OpenStruct.new(html_url: "https://github.com/example/repo/pull/12345") }
 
@@ -303,7 +303,7 @@ describe OctofactsUpdater::Service::GitHub do
         octokit = double("Octokit")
         allow(subject).to receive(:octokit).and_return(octokit)
         expect(octokit).to receive(:pull_requests).with("example/repo", {head: "github:foo", state: "open"}).and_return([])
-        expect(octokit).to receive(:create_pull_request).with("example/repo", "master", "foo", "PR_Subject", "PR_Body").and_return(pr)
+        expect(octokit).to receive(:create_pull_request).with("example/repo", "main", "foo", "PR_Subject", "PR_Body").and_return(pr)
         expect(subject).to receive(:verbose).with("Created a new PR https://github.com/example/repo/pull/12345")
         expect(subject).to receive(:pr_subject).and_return("PR_Subject")
         expect(subject).to receive(:pr_body).and_return("PR_Body")
