@@ -6,3 +6,7 @@ env: production
 role: puppetserver
 lsbdistcodename: precise
 shorthost: puppet-puppetserver-12345
+networking: {
+  fqdn: puppet-puppetserver-12345.dc1.example.com,
+  hostname: puppet-puppetserver-12345,
+}
