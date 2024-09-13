@@ -43,5 +43,5 @@ jobs:
             exit 0
           fi
     environment:
-      RSPEC_PUPPET_VERSION="3.0.0"
+      RSPEC_PUPPET_VERSION="5.0.0"
       PUPPET_VERSION="7.30.0"
