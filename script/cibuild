@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rspec_puppet_versions="5.0.0"
-puppet_versions="7.30.0"
+# rspec_puppet_versions="5.0.0"
+# puppet_versions="7.30.0"
 
 set -e
 
@@ -43,8 +43,10 @@ COVERAGE_UPDATER=$(grep "covered_percent" "$DIR/lib/octofacts_updater/coverage/.
 EXIT_INTEGRATION=0
 for puppet_version in $puppet_versions; do
   for rspec_puppet_version in $rspec_puppet_versions; do
-    export RSPEC_PUPPET_VERSION=$rspec_puppet_version
-    export PUPPET_VERSION=$puppet_version
+    # export RSPEC_PUPPET_VERSION=$rspec_puppet_version
+    # export PUPPET_VERSION=$puppet_version
+    # RSPEC_PUPPET_VERSION is stored as an env variable
+    # PUPPET_VERSION is stored as an env variable
     echo "==> Running integration tests (puppet ${PUPPET_VERSION}, rspec-puppet ${RSPEC_PUPPET_VERSION})"
     if "${DIR}/script/bootstrap" > "$TEMPDIR/bootstrap.log" 2>&1; then
       rm -f "$TEMPDIR/bootstrap.log"
