@@ -41,8 +41,8 @@ COVERAGE_UPDATER=$(grep "covered_percent" "$DIR/lib/octofacts_updater/coverage/.
 
 # Integration tests
 EXIT_INTEGRATION=0
-for puppet_version in $puppet_versions; do
-  for rspec_puppet_version in $rspec_puppet_versions; do
+# for puppet_version in $puppet_versions; do
+#   for rspec_puppet_version in $rspec_puppet_versions; do
     # export RSPEC_PUPPET_VERSION=$rspec_puppet_version
     # export PUPPET_VERSION=$puppet_version
     # RSPEC_PUPPET_VERSION is stored as an env variable
@@ -56,8 +56,8 @@ for puppet_version in $puppet_versions; do
     fi
     bundle exec rake octofacts:spec:octofacts_integration && local_integration_rspec=$? || local_integration_rspec=$?
     if [ "$local_integration_rspec" -ne 0 ]; then EXIT_INTEGRATION=$local_integration_rspec; fi
-  done
-done
+#   done
+# done
 
 echo ""
 echo "==> Summary Results"

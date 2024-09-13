@@ -6,6 +6,9 @@ jobs:
   integration-4_10_4:
     name: Integration Tests (Puppet 4.10.4)
     runs-on: ubuntu-latest
+    env:
+      RSPEC_PUPPET_VERSION: "2.6.15"
+      PUPPET_VERSION: "4.10.4"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
@@ -21,12 +24,12 @@ jobs:
           else
             exit 0
           fi
-    environment:
-      RSPEC_PUPPET_VERSION="2.6.15"
-      PUPPET_VERSION="4.10.4"
   integration-7_30_0:
     name: Integration Tests (Puppet 7.30.0)
     runs-on: ubuntu-latest
+    env:
+      RSPEC_PUPPET_VERSION: "5.0.0"
+      PUPPET_VERSION: "7.30.0"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
@@ -42,6 +45,3 @@ jobs:
           else
             exit 0
           fi
-    environment:
-      RSPEC_PUPPET_VERSION="5.0.0"
-      PUPPET_VERSION="7.30.0"
