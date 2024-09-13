@@ -177,12 +177,12 @@ describe "test::one" do
       end
     end
 
-    context "with fetch" do
+    context "with dig" do
       let(:facts) { Octofacts.from_file("basic.yaml") }
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts.fetch(:networking, :hostname)}"
+          content: "127.0.0.1 localhost #{facts.dig(:networking, 'hostname')}"
         )
       end
     end
@@ -199,12 +199,12 @@ describe "test::one" do
       end
     end
 
-    context "with fetch" do
+    context "with dig" do
       let(:facts) { Octofacts.from_file("basic.yaml") }
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts.fetch('networking', 'hostname')}"
+          content: "127.0.0.1 localhost #{facts.dig('networking', 'hostname')}"
         )
       end
     end

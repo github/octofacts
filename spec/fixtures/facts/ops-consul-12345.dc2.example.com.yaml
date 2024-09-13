@@ -9,4 +9,5 @@ shorthost: ops-consul-12345
 networking: {
   fqdn: ops-consul-12345.dc2.example.com,
   hostname: ops-consul-12345,
+  ip: 1.2.3.4,
 }

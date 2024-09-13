@@ -155,6 +155,7 @@ networking: {
   fqdn: somenode.example.net,
   hostname: somenode,
   domain: example.net,
+  ip: 172.16.1.2,
 }
 operatingsystem: Debian
 operatingsystemmajrelease: '8'

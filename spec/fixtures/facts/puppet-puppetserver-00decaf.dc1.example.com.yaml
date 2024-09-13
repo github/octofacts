@@ -9,4 +9,5 @@ shorthost: puppet-puppetserver-00decaf
 networking: {
   fqdn: puppet-puppetserver-00decaf.dc1.example.com,
   hostname: puppet-puppetserver-00decaf,
+  ip: 1.2.3.4,
 }
