@@ -55,3 +55,6 @@ build-iPhoneSimulator/
 
 # JetBrains
 .idea/**
+
+# VS Code
+.vscode/**
