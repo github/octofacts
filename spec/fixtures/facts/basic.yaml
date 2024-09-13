@@ -114,6 +114,10 @@ hardwareisa: unknown
 hardwaremodel: x86_64
 hostname: somenode
 id: root
+identity: {
+  user: root,
+  group: root,
+}
 interfaces: bond0,eth0,lo
 ip6tables_version: 1.4.21
 ipaddress: 172.16.1.2
@@ -147,6 +151,11 @@ netmask_eth0: 255.255.240.0
 netmask_lo: 255.0.0.0
 network_eth0: 172.16.0.0
 network_lo: 127.0.0.0
+networking: {
+  fqdn: somenode.example.net,
+  hostname: somenode,
+  domain: example.net,
+}
 operatingsystem: Debian
 operatingsystemmajrelease: '8'
 operatingsystemrelease: '8.8'
