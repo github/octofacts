@@ -9,8 +9,7 @@ describe "test::one" do
       {
         ec2: true,
         ec2_metadata: { placement: { "availability-zone": "us-foo-1a" } },
-        gid: "root",
-        id: "root"
+        identity: { user: "root", group: "root" },
       }
     end
 
@@ -122,7 +121,11 @@ describe "test::one" do
   end
 
   context "using chained manipulators" do
-    let(:facts) { Octofacts.from_file("basic.yaml").replace(id: "hats", gid: "caps").replace(ec2: false) }
+    let(:facts) do
+      Octofacts.from_file("basic.yaml")
+               .replace(identity: { user: "hats", group: "caps" })
+               .replace(ec2: false)
+    end
 
     it "should contain the file resource" do
       is_expected.to contain_file("/tmp/system-info.txt").with(
@@ -169,7 +172,7 @@ describe "test::one" do
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts[:shorthost]}"
+          content: "127.0.0.1 localhost #{facts[:networking][:hostname]}"
         )
       end
     end
@@ -179,7 +182,7 @@ describe "test::one" do
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts.fetch(:shorthost)}"
+          content: "127.0.0.1 localhost #{facts.fetch(:networking, :hostname)}"
         )
       end
     end
@@ -191,7 +194,7 @@ describe "test::one" do
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts['shorthost']}"
+          content: "127.0.0.1 localhost #{facts['networking']['hostname']}"
         )
       end
     end
@@ -201,7 +204,7 @@ describe "test::one" do
 
       it "should contain /etc/hosts with a symbol key" do
         is_expected.to contain_file("/etc/hosts").with(
-          content: "127.0.0.1 localhost #{facts.fetch('shorthost')}"
+          content: "127.0.0.1 localhost #{facts.fetch('networking', 'hostname')}"
         )
       end
     end
