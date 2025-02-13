@@ -96,7 +96,7 @@ GEM
     puppet-resource_api (1.9.0)
       hocon (>= 1.0)
     racc (1.8.1)
-    rack (3.1.7)
+    rack (3.1.10)
     rainbow (3.1.1)
     rake (13.2.1)
     regexp_parser (2.9.2)
