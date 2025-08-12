@@ -7,9 +7,9 @@ jobs:
     name: Integration Tests (Puppet 4.10.4)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up Ruby
-        uses: ruby/setup-ruby@52753b7da854d5c07df37391a986c76ab4615999 # v1.191.0
+        uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
       - name: Run Integration Tests
@@ -28,9 +28,9 @@ jobs:
     name: Integration Tests (Puppet 7.30.0)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up Ruby
-        uses: ruby/setup-ruby@52753b7da854d5c07df37391a986c76ab4615999 # v1.191.0
+        uses: ruby/setup-ruby@2a7b30092b0caf9c046252510f9273b4875f3db9 # v1.254.0
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
       - name: Run Integration Tests
