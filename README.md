@@ -1,3 +1,7 @@
+>[!NOTE]
+>_This repository is no longer supported or updated by GitHub. If you wish to continue to develop this code yourself, we recommend you fork it._</code>
+
+
 # octofacts
 
 `octofacts` is a tool that enables Puppet developers to provide complete sets of facts for rspec-puppet tests. It works by saving facts from actual hosts as fixture files, and then presenting a straightforward programming interface to select and manipulate those facts within tests. Using nearly real-life facts is a good way to ensure that rspec-puppet tests match production as closely as possible.
